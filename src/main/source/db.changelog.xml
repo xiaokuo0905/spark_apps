@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="1" author="evanchiu">
+	    <sql>
+--
+-- Table structure for table `report_ngix_day`
+--
+CREATE TABLE `report_ngix_day` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `day` date NOT NULL,
+  `province` tinyint(4) DEFAULT NULL,
+  `request_count` int(11) NOT NULL DEFAULT '0',
+  `active_ip_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_report_ngix_day_on_day` (`day`),
+  KEY `index_report_ngix_day_on_province` (`province`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+	    </sql>
+	</changeSet>
+	<changeSet id="2" author="evanchiu">
+	    <sql>
+--
+-- Table structure for table `report_ngix_hour`
+--
+CREATE TABLE `report_ngix_hour` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `day` date NOT NULL,
+  `hour` tinyint(4) NOT NULL,
+  `province` tinyint(4) DEFAULT NULL,
+  `request_count` int(11) NOT NULL DEFAULT '0',
+  `active_ip_count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `index_report_ngix_hour_on_day` (`day`),
+  KEY `index_report_ngix_hour_on_hour` (`hour`),
+  KEY `index_report_ngix_hour_on_province` (`province`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+	    </sql>
+	</changeSet>
+</databaseChangeLog>
